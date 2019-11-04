@@ -1,0 +1,56 @@
+{
+  "articulos": [
+    {
+      "id": 1,
+      "nombre": "I7 Lenovo",
+      "descripcion": "Portatil i7",
+      "precio": 100
+    },
+    {
+      "id": "10",
+      "nombre": "HP 1500L",
+      "descripcion": "Impresora Laser",
+      "precio": "200"
+    },
+    {
+      "id": 100,
+      "nombre": "HP2 1500L",
+      "descripcion": "Impresora Laser",
+      "precio": 200
+    },
+    {
+      "id": "99",
+      "nombre": "HP 1500L",
+      "descripcion": "Impresora Laserxxxx",
+      "precio": "200"
+    },
+    {
+      "id": 105,
+      "nombre": "HP2 1500L",
+      "descripcion": "xxxxxxImpresora Laser",
+      "precio": 8
+    },
+    {
+      "id": 70,
+      "precio": 8
+    }
+  ],
+  "clasificaciones": [
+    {
+      "nombre": "Drama",
+      "id": 1
+    },
+    {
+      "nombre": "Comedia",
+      "id": 2
+    },
+    {
+      "nombre": "Documental",
+      "id": 3
+    },
+    {
+      "nombre": "Accion",
+      "id": 4
+    }
+  ]
+}
