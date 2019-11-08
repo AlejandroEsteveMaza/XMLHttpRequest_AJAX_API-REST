@@ -1,37 +1,50 @@
-function getJson(){
-    console.log("asdasdasd");
+function getJson() {
+    var articulos = null;
+
+    //Vaciamos la tabla de articulos
+    var element = document.getElementById("articulos");
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+
+    //Obtenemos los articulos en texto
+    var http = new XMLHttpRequest();
+    http.open('GET', 'http://localhost:3000/articulos', true);
+    http.send();
+    http.addEventListener('readystatechange', function () {
+        if (http.readyState === 4 && http.status === 200) {
+            articulos = JSON.parse(http.responseText); // prod = [{"id": “valor id”, "nombre":"nombre del articulo"..... },{},{}]					
+            /* console.log(prods);
+            console.log(prods.length); 
+            articulos = prods; */
+        }
+    });
+
+    //Creamos la tabla de articulos
     var tabla = document.createElement("table");
 
     var trCabecera = document.createElement("tr");
-
-    var cabeceraElements = ["id","Nombre","Descripcion","Precio"];
+    //Cabecera tabla
+    var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio"];
     cabeceraElements.forEach(element => {
-        
+
         var tdname = document.createElement("th");
         texto = document.createTextNode(element);
         tdname.appendChild(texto);
         trCabecera.appendChild(tdname);
-    });/* 
-    var tdID = document.createElement("td");
-    texto = document.createTextNode("id");
-    tdID.appendChild(texto);
-    trCabecera.appendChild(tdID);
-
-    var tdNombre = document.createElement("td");
-    texto = document.createTextNode("nombre");
-    tdNombre.appendChild(texto);
-    trCabecera.appendChild(tdNombre);
-
-    var tdDescripcion = document.createElement("td");
-    texto = document.createTextNode("descripcion");
-    tdDescripcion.appendChild(texto);
-    trCabecera.appendChild(tdDescripcion);
-
-    var tdPrecio = document.createElement("td");
-    texto = document.createTextNode("precio");
-    tdPrecio.appendChild(texto);
-    trCabecera.appendChild(tdPrecio); */
-
+    });
     tabla.appendChild(trCabecera);
+
+    //Contenido tabla
+   console.log(articulos);
+    articulos.forEach(element => {
+        var tr = document.createElement("tr");
+        var tdname = document.createElement("td");
+        texto = document.createTextNode(element[descripcion]);
+        tdname.appendChild(texto);
+        tr.appendChild(tdname);
+    });
+    tabla.appendChild(trCabecera);
+
     document.getElementById("articulos").appendChild(tabla);
 }
