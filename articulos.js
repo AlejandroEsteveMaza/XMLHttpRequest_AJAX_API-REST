@@ -1,31 +1,42 @@
+/* window.onload = function() {
+    getJson()
+} */;
+
 function getJson() {
-    var articulos = null;
-
-    //Vaciamos la tabla de articulos
-    var element = document.getElementById("articulos");
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
-    }
-
     //Obtenemos los articulos en texto
     var http = new XMLHttpRequest();
     http.open('GET', 'http://localhost:3000/articulos', true);
     http.send();
     http.addEventListener('readystatechange', function () {
         if (http.readyState === 4 && http.status === 200) {
-            articulos = JSON.parse(http.responseText); // prod = [{"id": “valor id”, "nombre":"nombre del articulo"..... },{},{}]					
-            /* console.log(prods);
-            console.log(prods.length); 
-            articulos = prods; */
+
+            pintaTabla(JSON.parse(http.responseText));
         }
     });
+
+}
+
+function modifica() {
+    console.log="asdasd";
+}
+
+
+
+function pintaTabla(articulos) {
+    //Vaciamos la tabla de articulos
+    var element = document.getElementById("articulos");
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+
 
     //Creamos la tabla de articulos
     var tabla = document.createElement("table");
 
-    var trCabecera = document.createElement("tr");
+   
     //Cabecera tabla
-    var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio"];
+     var trCabecera = document.createElement("tr");
+    var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio", "Modificar", "Eliminar"];
     cabeceraElements.forEach(element => {
 
         var tdname = document.createElement("th");
@@ -36,15 +47,25 @@ function getJson() {
     tabla.appendChild(trCabecera);
 
     //Contenido tabla
-   console.log(articulos);
-    articulos.forEach(element => {
+    //console.log(articulos);
+    articulos.forEach(articulo => {
         var tr = document.createElement("tr");
-        var tdname = document.createElement("td");
-        texto = document.createTextNode(element[descripcion]);
-        tdname.appendChild(texto);
-        tr.appendChild(tdname);
+        for (var key in articulo) {
+            //console.log(key);
+            
+            var tdname = document.createElement("td");
+            texto = document.createTextNode(articulo[key]);
+            tdname.appendChild(texto);
+            tr.appendChild(tdname);
+        }
+        var boton = document.createElement("button");
+        boton.innerHTML = "Modifica";
+        boton.setAttribute("onclick",modifica());
+        tr.appendChild(boton);
+
+        tabla.appendChild(tr);
     });
-    tabla.appendChild(trCabecera);
+   
 
     document.getElementById("articulos").appendChild(tabla);
 }
