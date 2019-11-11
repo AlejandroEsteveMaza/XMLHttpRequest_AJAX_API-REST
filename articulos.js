@@ -19,7 +19,9 @@ function getJson() {
 function modifica() {
     console.log="asdasd";
 }
-
+function elimina() {
+    console.log="aaaaaa";
+}
 
 
 function pintaTabla(articulos) {
@@ -35,7 +37,7 @@ function pintaTabla(articulos) {
 
    
     //Cabecera tabla
-     var trCabecera = document.createElement("tr");
+    var trCabecera = document.createElement("tr");
     var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio", "Modificar", "Eliminar"];
     cabeceraElements.forEach(element => {
 
@@ -58,10 +60,19 @@ function pintaTabla(articulos) {
             tdname.appendChild(texto);
             tr.appendChild(tdname);
         }
+        var td = document.createElement("td");
         var boton = document.createElement("button");
         boton.innerHTML = "Modifica";
         boton.setAttribute("onclick",modifica());
-        tr.appendChild(boton);
+        td.appendChild(boton);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var boton = document.createElement("button");
+        boton.innerHTML = "Elimina";
+        boton.setAttribute("onclick",elimina());
+        td.appendChild(boton);
+        tr.appendChild(td);
 
         tabla.appendChild(tr);
     });
