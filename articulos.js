@@ -1,6 +1,24 @@
-/* window.onload = function() {
-    getJson()
-} */;
+window.onload = function () {
+
+    var divModal = document.createElement("div");
+    divModal.id = "modal";
+    divModal.className = "modal";
+    var divContenido = document.createElement("div");
+    divContenido.className = "modal-content";
+
+    var span = document.createElement("span");
+    span.className = "close";
+    span.innerHTML = "&times;";
+    var p = document.createElement("p");
+    p.innerHTML = "texto de ejemplo";
+    divContenido.appendChild(span);
+    divContenido.appendChild(p);
+    divModal.appendChild(divContenido);
+
+    var articulos = document.getElementById("articulos");
+    articulos.appendChild(divModal);
+
+};
 
 function getJson() {
     //Obtenemos los articulos en texto
@@ -9,20 +27,11 @@ function getJson() {
     http.send();
     http.addEventListener('readystatechange', function () {
         if (http.readyState === 4 && http.status === 200) {
-
             pintaTabla(JSON.parse(http.responseText));
         }
     });
 
 }
-
-function modifica() {
-    console.log="asdasd";
-}
-function elimina() {
-    console.log="aaaaaa";
-}
-
 
 function pintaTabla(articulos) {
     //Vaciamos la tabla de articulos
@@ -35,7 +44,7 @@ function pintaTabla(articulos) {
     //Creamos la tabla de articulos
     var tabla = document.createElement("table");
 
-   
+
     //Cabecera tabla
     var trCabecera = document.createElement("tr");
     var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio", "Modificar", "Eliminar"];
@@ -54,29 +63,89 @@ function pintaTabla(articulos) {
         var tr = document.createElement("tr");
         for (var key in articulo) {
             //console.log(key);
-            
+
             var tdname = document.createElement("td");
             texto = document.createTextNode(articulo[key]);
             tdname.appendChild(texto);
             tr.appendChild(tdname);
         }
         var td = document.createElement("td");
-        var boton = document.createElement("button");
-        boton.innerHTML = "Modifica";
-        boton.setAttribute("onclick",modifica());
-        td.appendChild(boton);
+        var botonModifica = document.createElement("button");
+        botonModifica.innerHTML = "Modifica";
+        botonModifica.setAttribute('onclick', "modifica()");
+        botonModifica.id = "btnMod";
+        td.appendChild(botonModifica);
         tr.appendChild(td);
 
         var td = document.createElement("td");
-        var boton = document.createElement("button");
-        boton.innerHTML = "Elimina";
-        boton.setAttribute("onclick",elimina());
-        td.appendChild(boton);
+        var botonElimina = document.createElement("button");
+        botonElimina.innerHTML = "Elimina";
+        botonElimina.setAttribute('onclick', "elimina()");
+        td.appendChild(botonElimina);
         tr.appendChild(td);
 
         tabla.appendChild(tr);
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        //var btn = document.getElementById("btnMod");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        botonModifica.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     });
-   
+
 
     document.getElementById("articulos").appendChild(tabla);
 }
+function modifica() {
+
+
+    /* // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("btnMod");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } */
+}
+function elimina() {
+    console.log("bbbbb world!");
+} 

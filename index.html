@@ -2,34 +2,31 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <style>
-        table {
-          font-family: arial, sans-serif;
-          text-align: center;
-          border-collapse: collapse;
-          width: 100%;
-          margin-top: 2%;
-        }
-        
-        td, th {
-          border: 1px solid #dddddd;
-          padding: 8px;
-        }
-        </style>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="articulos.js"></script>
 </head>
 
 <body>
-    <button onclick="getJson()">GET</button>
-    <button onclick="postJson()">POST</button>
-    <button onclick="putJson()">PUT</button>
-    <button onclick="deleteJson()">DELETE</button>
-    <button onclick="patchJson()">PATCH</button>
+  <button onclick="getJson()">GET</button>
+  <button onclick="postJson()">POST</button>
+  <button onclick="putJson()">PUT</button>
+  <button onclick="deleteJson()">DELETE</button>
+  <button onclick="patchJson()">PATCH</button>
 
-    <div class="articulos" id="articulos"></div>
+  <div class="articulos" id="articulos"></div>
+  <!-- <div id="myModal" class="modal">
 
-    <div class="formulario" id="formulario"></div>
+    
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+
+  </div> -->
+
+  <div class="formulario" id="formulario"></div>
 
 </body>
-<script src="articulos.js"></script>
+
 </html>
