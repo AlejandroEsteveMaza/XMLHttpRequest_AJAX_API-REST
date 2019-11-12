@@ -47,6 +47,7 @@ function pintaTabla(articulos) {
 
     //Cabecera tabla
     var trCabecera = document.createElement("tr");
+    trCabecera.className = "cabecera";
     var cabeceraElements = ["id", "Nombre", "Descripcion", "Precio", "Modificar", "Eliminar"];
     cabeceraElements.forEach(element => {
 
@@ -81,9 +82,6 @@ function pintaTabla(articulos) {
         var botonElimina = document.createElement("button");
         botonElimina.innerHTML = "Elimina";
         botonElimina.setAttribute('onclick', "elimina()");
-
-
-
         tdDel.appendChild(botonElimina);
         tr.appendChild(tdDel);
 
