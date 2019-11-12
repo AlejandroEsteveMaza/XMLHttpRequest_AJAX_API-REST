@@ -1,22 +1,22 @@
 window.onload = function () {
 
     var divModal = document.createElement("div");
-    divModal.id = "modal";
-    divModal.className = "modal";
-    var divContenido = document.createElement("div");
-    divContenido.className = "modal-content";
-
-    var span = document.createElement("span");
-    span.className = "close";
-    span.innerHTML = "&times;";
-    var p = document.createElement("p");
-    p.innerHTML = "texto de ejemplo";
-    divContenido.appendChild(span);
-    divContenido.appendChild(p);
-    divModal.appendChild(divContenido);
-
-    var articulos = document.getElementById("articulos");
-    articulos.appendChild(divModal);
+     divModal.id = "myModal";
+     divModal.className = "modal";
+     var divContenido = document.createElement("div");
+     divContenido.className = "modal-content";
+ 
+     var span = document.createElement("span");
+     span.className = "close";
+     span.innerHTML = "&times;";
+     var p = document.createElement("p");
+     p.innerHTML = "texto de ejemplo";
+     divContenido.appendChild(span);
+     divContenido.appendChild(p);
+     divModal.appendChild(divContenido);
+ 
+     var body = document.getElementsByTagName('body')[0];
+     body.appendChild(divModal); 
 
 };
 
@@ -69,20 +69,23 @@ function pintaTabla(articulos) {
             tdname.appendChild(texto);
             tr.appendChild(tdname);
         }
-        var td = document.createElement("td");
+        var tdMod = document.createElement("td");
         var botonModifica = document.createElement("button");
         botonModifica.innerHTML = "Modifica";
-        botonModifica.setAttribute('onclick', "modifica()");
+        //botonModifica.setAttribute('onclick', "modifica()");
         botonModifica.id = "btnMod";
-        td.appendChild(botonModifica);
-        tr.appendChild(td);
+        tdMod.appendChild(botonModifica);
+        tr.appendChild(tdMod);
 
-        var td = document.createElement("td");
+        var tdDel = document.createElement("td");
         var botonElimina = document.createElement("button");
         botonElimina.innerHTML = "Elimina";
         botonElimina.setAttribute('onclick', "elimina()");
-        td.appendChild(botonElimina);
-        tr.appendChild(td);
+
+
+
+        tdDel.appendChild(botonElimina);
+        tr.appendChild(tdDel);
 
         tabla.appendChild(tr);
 
