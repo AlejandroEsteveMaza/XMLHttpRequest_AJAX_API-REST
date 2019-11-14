@@ -24,6 +24,7 @@ window.onload = function () {
     var inputBtn = document.createElement("input");
     inputBtn.type = "submit";
     inputBtn.value= "Aceptar";
+    inputBtn.addEventListener("click", aceptarFormModal);
     divContenido.appendChild(inputBtn);
 
     divModal.appendChild(divContenido);
@@ -33,6 +34,10 @@ window.onload = function () {
     //Carga ventana modal para el boton POST
     modal(document.getElementById("btnPost"));
 };
+
+function aceptarFormModal(){
+    console.log(this.parentNode.nodeName);
+}
 
 function getJson() {
     //Obtenemos los articulos en texto
@@ -127,7 +132,7 @@ function pintaTabla(articulos) {
         var botonModifica = document.createElement("button");
         botonModifica.innerHTML = "Modifica";
         //botonModifica.setAttribute('onclick', "modifica()");
-        botonModifica.id = "btnMod";
+        botonModifica.id = "btnMod-"+articulo["id"];
         tdMod.appendChild(botonModifica);
         tr.appendChild(tdMod);
 
@@ -175,9 +180,6 @@ function modal(btn) {
     }
 }
 
-function modifica() {
-
-}
 
 function elimina() {
     console.log("bbbbb world!");
