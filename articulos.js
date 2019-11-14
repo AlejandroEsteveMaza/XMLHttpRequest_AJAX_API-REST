@@ -1,22 +1,22 @@
 window.onload = function () {
 
     var divModal = document.createElement("div");
-     divModal.id = "myModal";
-     divModal.className = "modal";
-     var divContenido = document.createElement("div");
-     divContenido.className = "modal-content";
- 
-     var span = document.createElement("span");
-     span.className = "close";
-     span.innerHTML = "&times;";
-     var p = document.createElement("p");
-     p.innerHTML = "texto de ejemplo";
-     divContenido.appendChild(span);
-     divContenido.appendChild(p);
-     divModal.appendChild(divContenido);
- 
-     var body = document.getElementsByTagName('body')[0];
-     body.appendChild(divModal); 
+    divModal.id = "myModal";
+    divModal.className = "modal";
+    var divContenido = document.createElement("div");
+    divContenido.className = "modal-content";
+
+    var span = document.createElement("span");
+    span.className = "close";
+    span.innerHTML = "&times;";
+    var p = document.createElement("p");
+    p.innerHTML = "texto de ejemplo";
+    divContenido.appendChild(span);
+    divContenido.appendChild(p);
+    divModal.appendChild(divContenido);
+
+    var body = document.getElementsByTagName('body')[0];
+    body.appendChild(divModal);
 
 };
 
@@ -32,6 +32,52 @@ function getJson() {
     });
 
 }
+function postJson() {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("btnPost");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+   /*  var prod2 = {
+        "id": 105,
+        "nombre": "HP2 1500L",
+        "descripcion": "xxxxxxImpresora Laser",
+        "precio": 200
+    }; */
+
+    /* var http = new XMLHttpRequest();
+    http.open('POST', 'http://localhost:3000/articulos', true);
+    //http.setRequestHeader("Content-type", "application/json");
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send(JSON.stringify(prod2));
+    http.addEventListener('readystatechange', function () {
+        if (http.readyState === 4 && http.status === 200) {
+            if (parseInt(http.responseText) === 1) alert("Todo ha ido bien");
+            else alert("Ha habido un error al añadir el producto");
+        }
+    }); */
+}
+
 
 function pintaTabla(articulos) {
     //Vaciamos la tabla de articulos
@@ -62,11 +108,29 @@ function pintaTabla(articulos) {
     //console.log(articulos);
     articulos.forEach(articulo => {
         var tr = document.createElement("tr");
-        for (var key in articulo) {
+        /* for (var key in articulo) {
             //console.log(key);
 
             var tdname = document.createElement("td");
             texto = document.createTextNode(articulo[key]);
+            tdname.appendChild(texto);
+            tr.appendChild(tdname);
+        } */
+
+        for (let i = 0; i < 4; i++) {
+            const element = Object.keys(articulo)[i];
+            console.log(articulo[element]);
+            var tdname = document.createElement("td");
+
+            //console.log(texto.textContent);
+            if (articulo[element] === undefined) {
+                texto = document.createTextNode(" ");
+                tdname.appendChild(texto);
+            } else {
+                texto = document.createTextNode(articulo[element]);
+                tdname.appendChild(texto);
+
+            }
             tdname.appendChild(texto);
             tr.appendChild(tdname);
         }
