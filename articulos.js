@@ -1,5 +1,5 @@
 window.onload = function () {
-
+    //Creación modal
     var divModal = document.createElement("div");
     divModal.id = "myModal";
     divModal.className = "modal";
@@ -9,15 +9,29 @@ window.onload = function () {
     var span = document.createElement("span");
     span.className = "close";
     span.innerHTML = "&times;";
-    var p = document.createElement("p");
-    p.innerHTML = "texto de ejemplo";
     divContenido.appendChild(span);
-    divContenido.appendChild(p);
-    divModal.appendChild(divContenido);
+    
+    //Formulario Modal
+    var inputElements = ["id", "Nombre", "Descripcion", "Precio"];
+    inputElements.forEach(element => {
+        var input = this.document.createElement("input");
+        input.type = "text";
+        input.id = element;
+        input.placeholder = "Introduce " + element + "...";
+        divContenido.appendChild(input);
+    });
+    //Boton Formulario Modal
+    var inputBtn = document.createElement("input");
+    inputBtn.type = "submit";
+    inputBtn.value= "Aceptar";
+    divContenido.appendChild(inputBtn);
 
+    divModal.appendChild(divContenido);
     var body = document.getElementsByTagName('body')[0];
     body.appendChild(divModal);
 
+    //Carga ventana modal para el boton POST
+    modal(document.getElementById("btnPost"));
 };
 
 function getJson() {
@@ -33,37 +47,12 @@ function getJson() {
 
 }
 function postJson() {
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("btnPost");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-   /*  var prod2 = {
-        "id": 105,
-        "nombre": "HP2 1500L",
-        "descripcion": "xxxxxxImpresora Laser",
-        "precio": 200
-    }; */
+    /*  var prod2 = {
+         "id": 105,
+         "nombre": "HP2 1500L",
+         "descripcion": "xxxxxxImpresora Laser",
+         "precio": 200
+     }; */
 
     /* var http = new XMLHttpRequest();
     http.open('POST', 'http://localhost:3000/articulos', true);
@@ -151,45 +140,19 @@ function pintaTabla(articulos) {
 
         tabla.appendChild(tr);
 
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        //var btn = document.getElementById("btnMod");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        botonModifica.onclick = function () {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        modal(botonModifica);
     });
 
 
     document.getElementById("articulos").appendChild(tabla);
 }
-function modifica() {
 
-
-    /* // Get the modal
+function modal(btn) {
+    // Get the modal
     var modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("btnMod");
+    //var btn = document.getElementById("btnMod");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -209,8 +172,13 @@ function modifica() {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    } */
+    }
 }
+
+function modifica() {
+
+}
+
 function elimina() {
     console.log("bbbbb world!");
 } 
