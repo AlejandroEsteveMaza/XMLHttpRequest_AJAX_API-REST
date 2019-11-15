@@ -1,4 +1,5 @@
 window.onload = function () {
+    getJson();
     /*  //Creación modal
      var divModal = document.createElement("div");
      divModal.id = "myModal";
@@ -197,9 +198,7 @@ function cargaModal(id) {
 
 
 
-function elimina() {
-    //console.log("bbbbb world!");
-}
+
 
 
 
@@ -217,6 +216,10 @@ function getJson() {
         }
     });
 
+}
+
+function elimina() {
+    //console.log("bbbbb world!");
 }
 
 
@@ -273,23 +276,29 @@ function aceptarFormModal() {
     var accion = document.getElementById("btnModal").getAttribute('action')
     if (accion == "POST") {
         postJson();
+         var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        getJson(); 
     } else if (accion == "PUT") {
         putJson(data);
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        getJson();
     }
 }
 
 
-function putJson(data) {
+function putJson(dat) {
 
     var data = {};
-    data.id = this.data[1];
-    data.nombre = this.data[2];
-    data.descripcion = this.data[0];
-    data.precio = this.data[3];
+    data.id = dat[1];
+    data.nombre = dat[2];
+    data.descripcion = dat[0];
+    data.precio = dat[3];
     var json = JSON.stringify(data);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("PUT", 'http://localhost:3000/articulos/' + this.data[1], true);
+    xhr.open("PUT", 'http://localhost:3000/articulos/' + dat[1], true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.onload = function () {
         var users = JSON.parse(xhr.responseText);
@@ -299,7 +308,7 @@ function putJson(data) {
             console.error(users);
         }
     }
-    xhr.send(json); 
+    xhr.send(json);
 }
 
 function postJson() {
@@ -314,26 +323,46 @@ function postJson() {
         }
     }
     matches.forEach(element => {
-        console.log(element.id);
+        //console.log(element.id);
         document.getElementById(element.id).value = "";
     });
-    //POST
-    /*  var prod2 = {
-         "id": 105,
-         "nombre": "HP2 1500L",
-         "descripcion": "xxxxxxImpresora Laser",
-         "precio": 200
-     }; */
 
-    /* var http = new XMLHttpRequest();
-    http.open('POST', 'http://localhost:3000/articulos', true);
-    //http.setRequestHeader("Content-type", "application/json");
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.send(JSON.stringify(prod2));
-    http.addEventListener('readystatechange', function () {
-        if (http.readyState === 4 && http.status === 200) {
-            if (parseInt(http.responseText) === 1) alert("Todo ha ido bien");
-            else alert("Ha habido un error al añadir el producto");
+    //POST
+
+    //Obtenemos los campos del formulario
+    var matches = [];
+    var searchEles = document.getElementById("modal-id").children;
+    for (var i = 0; i < searchEles.length; i++) {
+        if (searchEles[i].type == 'text') {
+            matches.push(searchEles[i]);
         }
-    }); */
+    }
+    console.log(matches);
+     
+    matches.forEach(element => {
+        document.getElementById(element.id).value = articulo[element.id];
+    });
+
+
+
+    var data = {};
+    data.id =  matches.getElementById("id").value;
+    data.nombre = matches.getElementById("nombre").value;
+    data.descripcion =  matches.getElementById("descripcion").value;
+    data.precio =  matches.getElementById("precio").value;
+    
+    var json = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:3000/articulos', true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = function () {
+        var users = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == "201") {
+            console.table(users);
+        } else {
+            console.error(users);
+        }
+    }
+    xhr.send(json);
 }

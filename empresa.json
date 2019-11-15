@@ -4,13 +4,13 @@
       "id": 1,
       "nombre": "I7 Lenovo",
       "descripcion": "Portatil i7",
-      "precio": 100
+      "precio": "2"
     },
     {
       "id": "10",
       "nombre": "HP 1500L",
-      "descripcion": "Impresora Laser",
-      "precio": "200"
+      "descripcion": "Impresora Laser ULTRA XL",
+      "precio": "123"
     },
     {
       "id": 100,
@@ -32,7 +32,9 @@
     },
     {
       "id": 70,
-      "precio": 8
+      "nombre": "dat",
+      "descripcion": "dart",
+      "precio": "777"
     }
   ],
   "clasificaciones": [
