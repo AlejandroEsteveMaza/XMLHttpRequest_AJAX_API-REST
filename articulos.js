@@ -269,14 +269,37 @@ function aceptarFormModal() {
     matches.forEach(element => {
         data.push(document.getElementById(element.id).value);
     });
-    console.log(data);
+    //console.log(data[1]);
     var accion = document.getElementById("btnModal").getAttribute('action')
-    console.log(accion);
     if (accion == "POST") {
-
+        postJson();
     } else if (accion == "PUT") {
-
+        putJson(data);
     }
+}
+
+
+function putJson(data) {
+
+    var data = {};
+    data.id = this.data[1];
+    data.nombre = this.data[2];
+    data.descripcion = this.data[0];
+    data.precio = this.data[3];
+    var json = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", 'http://localhost:3000/articulos/' + this.data[1], true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = function () {
+        var users = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == "200") {
+            console.table(users);
+        } else {
+            console.error(users);
+        }
+    }
+    xhr.send(json); 
 }
 
 function postJson() {
@@ -313,22 +336,4 @@ function postJson() {
             else alert("Ha habido un error al añadir el producto");
         }
     }); */
-}
-function putArticuloJson() {
-
-
-    /* var json = JSON.stringify(matches);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("PUT", 'http://localhost:3000/articulos/' + '/12', true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.onload = function () {
-        var users = JSON.parse(xhr.responseText);
-        if (xhr.readyState == 4 && xhr.status == "200") {
-            console.table(users);
-        } else {
-            console.error(users);
-        }
-    }
-    xhr.send(json); */
 }
