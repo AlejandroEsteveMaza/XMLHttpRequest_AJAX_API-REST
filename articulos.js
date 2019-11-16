@@ -1,39 +1,5 @@
 window.onload = function () {
     getJson();
-    /*  //Creación modal
-     var divModal = document.createElement("div");
-     divModal.id = "myModal";
-     divModal.className = "modal";
-     var divContenido = document.createElement("div");
-     divContenido.className = "modal-content";
- 
-     var span = document.createElement("span");
-     span.className = "close";
-     span.innerHTML = "&times;";
-     divContenido.appendChild(span);
-     
-     //Formulario Modal
-     var inputElements = ["id", "Nombre", "Descripcion", "Precio"];
-     inputElements.forEach(element => {
-         var input = this.document.createElement("input");
-         input.type = "text";
-         input.id = element;
-         input.placeholder = "Introduce " + element + "...";
-         divContenido.appendChild(input);
-     });
-     //Boton Formulario Modal
-     var inputBtn = document.createElement("input");
-     inputBtn.type = "submit";
-     inputBtn.value= "Aceptar";
-     inputBtn.addEventListener("click", aceptarFormModal);
-     divContenido.appendChild(inputBtn);
- 
-     divModal.appendChild(divContenido);
-     var body = document.getElementsByTagName('body')[0];
-     body.appendChild(divModal); */
-
-    //Carga ventana modal para el boton POST
-    //cargaModal(document.getElementById("btnPost"));
 };
 
 function pintaTabla(articulos) {
@@ -276,9 +242,9 @@ function aceptarFormModal() {
     var accion = document.getElementById("btnModal").getAttribute('action')
     if (accion == "POST") {
         postJson();
-         var modal = document.getElementById("myModal");
+        var modal = document.getElementById("myModal");
         modal.style.display = "none";
-        getJson(); 
+        getJson();
     } else if (accion == "PUT") {
         putJson(data);
         var modal = document.getElementById("myModal");
@@ -314,18 +280,6 @@ function putJson(dat) {
 function postJson() {
 
 
-    //Vaciamos los campos del formulario
-    var matches = [];
-    var searchEles = document.getElementById("modal-id").children;
-    for (var i = 0; i < searchEles.length; i++) {
-        if (searchEles[i].type == 'text') {
-            matches.push(searchEles[i]);
-        }
-    }
-    matches.forEach(element => {
-        //console.log(element.id);
-        document.getElementById(element.id).value = "";
-    });
 
     //POST
 
@@ -337,32 +291,35 @@ function postJson() {
             matches.push(searchEles[i]);
         }
     }
-    console.log(matches);
-     
+    //console.log(matches);
+    var datos = [];
     matches.forEach(element => {
-        document.getElementById(element.id).value = articulo[element.id];
+        datos.push(document.getElementById(element.id).value);
     });
 
-
+    //console.log(datos);
 
     var data = {};
-    data.id =  matches.getElementById("id").value;
-    data.nombre = matches.getElementById("nombre").value;
-    data.descripcion =  matches.getElementById("descripcion").value;
-    data.precio =  matches.getElementById("precio").value;
-    
-    var json = JSON.stringify(data);
+    data.id = datos[1];
+    data.nombre = datos[2];
+    data.descripcion = datos[0];
+    data.precio = datos[3];
+    console.log(data);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:3000/articulos', true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.onload = function () {
-        var users = JSON.parse(xhr.responseText);
-        if (xhr.readyState == 4 && xhr.status == "201") {
-            console.table(users);
-        } else {
-            console.error(users);
+    if (data.id != "") {
+        var json = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'http://localhost:3000/articulos', true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.onload = function () {
+            var articulo = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "201") {
+                console.table(articulo);
+            } else {
+                console.error(articulo);
+            }
         }
+
+        xhr.send(json);
     }
-    xhr.send(json);
 }

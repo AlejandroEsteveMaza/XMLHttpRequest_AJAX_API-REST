@@ -28,13 +28,31 @@
       "id": 105,
       "nombre": "HP2 1500L",
       "descripcion": "xxxxxxImpresora Laser",
-      "precio": 8
+      "precio": "84"
     },
     {
       "id": 70,
       "nombre": "dat",
       "descripcion": "dart",
-      "precio": "777"
+      "precio": "7771"
+    },
+    {
+      "id": "12",
+      "nombre": "nom2",
+      "descripcion": "desc",
+      "precio": "123"
+    },
+    {
+      "id": "13",
+      "nombre": "nom2",
+      "descripcion": "desc2",
+      "precio": "2345"
+    },
+    {
+      "id": "14",
+      "nombre": "123",
+      "descripcion": "123",
+      "precio": "123"
     }
   ],
   "clasificaciones": [
