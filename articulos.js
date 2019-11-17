@@ -69,7 +69,8 @@ function pintaTabla(articulos) {
         var tdDel = document.createElement("td");
         var botonElimina = document.createElement("button");
         botonElimina.innerHTML = "Elimina";
-        botonElimina.setAttribute('onclick', "elimina()");
+        botonElimina.id = "btnDel-" + articulo["id"];
+        botonElimina.setAttribute('onclick',"elimina(this.id)");
         tdDel.appendChild(botonElimina);
         tr.appendChild(tdDel);
 
@@ -175,17 +176,24 @@ function getJson() {
     //Obtenemos los articulos en texto
     var http = new XMLHttpRequest();
     http.open('GET', 'http://localhost:3000/articulos', true);
-    http.send();
+    
     http.addEventListener('readystatechange', function () {
         if (http.readyState === 4 && http.status === 200) {
             pintaTabla(JSON.parse(http.responseText));
         }
     });
-
+    http.send(null);
 }
 
-function elimina() {
-    //console.log("bbbbb world!");
+function elimina(btnID) {
+    var idArtc = btnID.split("-")[1];
+    console.log(idArtc);
+    
+    //DELETE
+    var http = new XMLHttpRequest();
+    http.open("DELETE","http://localhost:3000/articulos/"+idArtc, true);
+    http.send(null);
+
 }
 
 
@@ -214,13 +222,12 @@ function getArticuloJson(id) {
     //Obtenemos los articulos en texto
     var http = new XMLHttpRequest();
     http.open('GET', 'http://localhost:3000/articulos/' + id, true);
-    http.send();
     http.addEventListener('readystatechange', function () {
         if (http.readyState === 4 && http.status === 200) {
             modifica(JSON.parse(http.responseText));
         }
     });
-
+    http.send(null);
 }
 
 function aceptarFormModal() {
